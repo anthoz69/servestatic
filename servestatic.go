@@ -1,20 +1,20 @@
-package serverstatic
+package servestatic
 
 import (
 	"net/http"
 	"os"
 )
 
-type servestatic struct {
+type serveStatic struct {
 	http.FileSystem
 }
 
 // New is create handler for serve static.
 func New(file string) http.Handler {
-	return http.FileServer(&servestatic{http.Dir(file)})
+	return http.FileServer(&serveStatic{http.Dir(file)})
 }
 
-func (fs *servestatic) Open(name string) (http.File, error) {
+func (fs *serveStatic) Open(name string) (http.File, error) {
 	file, err := fs.FileSystem.Open(name)
 	if err != nil {
 		return nil, err
